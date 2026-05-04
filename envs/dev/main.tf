@@ -1,3 +1,7 @@
+provider "azurerm" {
+  features {}
+}
+
 module "network" {
   source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//network"
 
