@@ -51,11 +51,6 @@ module "network" {
 
   bastion_subnet_cidr = "10.0.3.0/27"
   gateway_subnet_cidr = "10.0.4.0/27"
-
-  tags = {
-    environment = "dev"
-    owner       = "darshan"
-  }
 }
 
 ########################################
@@ -78,9 +73,4 @@ module "avd" {
 
   admin_username = var.admin_username
   admin_password = var.admin_password
-
-  tags = {
-    environment = "dev"
-    owner       = "darshan"
-  }
 }
