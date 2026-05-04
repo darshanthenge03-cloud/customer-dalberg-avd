@@ -19,14 +19,12 @@ provider "azurerm" {
 # Resource Groups
 ########################################
 
-resource "azurerm_resource_group" "network" {
-  name     = "rg-network-dev"
-  location = "Central India"
+data "azurerm_resource_group" "network" {
+  name = "rg-network-dev"
 }
 
-resource "azurerm_resource_group" "avd" {
-  name     = "rg-avd-dev"
-  location = "Central India"
+data "azurerm_resource_group" "avd" {
+  name = "rg-avd-dev"
 }
 
 ########################################
@@ -36,8 +34,8 @@ resource "azurerm_resource_group" "avd" {
 module "network" {
   source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//network"
 
-  resource_group_name = azurerm_resource_group.network.name
-  location            = azurerm_resource_group.network.location
+  resource_group_name = data.azurerm_resource_group.network.name
+  location            = data.azurerm_resource_group.network.location
 
   vnet_cidr = "10.0.0.0/16"
 
@@ -65,8 +63,8 @@ module "avd" {
   host_pool_name      = "avd-hp-dev"
   app_group_name      = "avd-dag-dev"
   workspace_name      = "avd-ws-dev"
-  resource_group_name = azurerm_resource_group.avd.name
-  location            = azurerm_resource_group.avd.location
+  resource_group_name = data.azurerm_resource_group.avd.name
+  location            = data.azurerm_resource_group.avd.location
 
   session_host_count = 1
   vm_size            = "Standard_D4s_v5"
