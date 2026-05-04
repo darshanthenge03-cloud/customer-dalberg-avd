@@ -1,5 +1,5 @@
 ########################################
-# Terraform + Provider
+# Terraform + Backend + Provider
 ########################################
 
 terraform {
@@ -9,9 +9,8 @@ terraform {
       version = "~> 3.0"
     }
   }
-}
 
-backend "azurerm" {
+  backend "azurerm" {
     resource_group_name  = "rg-dalberg-terraform-state"
     storage_account_name = "tfstatedalbergdevstr"
     container_name       = "tfstate"
@@ -24,7 +23,7 @@ provider "azurerm" {
 }
 
 ########################################
-# Resource Groups
+# Existing Resource Groups (DATA)
 ########################################
 
 data "azurerm_resource_group" "network" {
@@ -71,6 +70,7 @@ module "avd" {
   host_pool_name      = "avd-hp-dev"
   app_group_name      = "avd-dag-dev"
   workspace_name      = "avd-ws-dev"
+
   resource_group_name = data.azurerm_resource_group.avd.name
   location            = data.azurerm_resource_group.avd.location
 
