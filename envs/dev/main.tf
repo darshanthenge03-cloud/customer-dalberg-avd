@@ -1,5 +1,5 @@
 module "network" {
-  source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//network?ref=v1.0.0"
+  source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//network"
 
   resource_group_name = "rg-network-dev"
   location            = "Central India"
@@ -19,7 +19,7 @@ module "network" {
 }
 
 module "avd" {
-  source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//avd?ref=v1.0.0"
+  source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//avd"
 
   subnet_id = module.network.private_subnet_ids["app-subnet"]
 
