@@ -11,6 +11,14 @@ terraform {
   }
 }
 
+  backend "azurerm" {
+    resource_group_name  = "rg-dalberg-terraform-state"
+    storage_account_name = "tfstatedalbergdevstr"
+    container_name       = "tfstate"
+    key                  = "avd-dev.tfstate"
+  }
+}
+
 provider "azurerm" {
   features {}
 }
