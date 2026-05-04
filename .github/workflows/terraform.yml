@@ -26,9 +26,15 @@ jobs:
         working-directory: envs/dev
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -input=false
         working-directory: envs/dev
+        env:
+          TF_VAR_admin_username: ${{ secrets.TF_VAR_admin_username }}
+          TF_VAR_admin_password: ${{ secrets.TF_VAR_admin_password }}
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -input=false
         working-directory: envs/dev
+        env:
+          TF_VAR_admin_username: ${{ secrets.TF_VAR_admin_username }}
+          TF_VAR_admin_password: ${{ secrets.TF_VAR_admin_password }}
