@@ -1,12 +1,43 @@
+########################################
+# Terraform + Provider
+########################################
+
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.0"
+    }
+  }
+}
+
 provider "azurerm" {
   features {}
 }
 
+########################################
+# Resource Groups
+########################################
+
+resource "azurerm_resource_group" "network" {
+  name     = "rg-network-dev"
+  location = "Central India"
+}
+
+resource "azurerm_resource_group" "avd" {
+  name     = "rg-avd-dev"
+  location = "Central India"
+}
+
+########################################
+# Network Module
+########################################
+
 module "network" {
   source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//network"
 
-  resource_group_name = "rg-network-dev"
-  location            = "Central India"
+  resource_group_name = azurerm_resource_group.network.name
+  location            = azurerm_resource_group.network.location
 
   vnet_cidr = "10.0.0.0/16"
 
@@ -20,7 +51,16 @@ module "network" {
 
   bastion_subnet_cidr = "10.0.3.0/27"
   gateway_subnet_cidr = "10.0.4.0/27"
+
+  tags = {
+    environment = "dev"
+    owner       = "darshan"
+  }
 }
+
+########################################
+# AVD Module
+########################################
 
 module "avd" {
   source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//avd"
@@ -30,10 +70,17 @@ module "avd" {
   host_pool_name      = "avd-hp-dev"
   app_group_name      = "avd-dag-dev"
   workspace_name      = "avd-ws-dev"
-  resource_group_name = "rg-avd-dev"
-  location            = "Central India"
+  resource_group_name = azurerm_resource_group.avd.name
+  location            = azurerm_resource_group.avd.location
 
   session_host_count = 1
-  admin_username     = var.admin_username
-  admin_password     = var.admin_password
+  vm_size            = "Standard_D4s_v5"
+
+  admin_username = var.admin_username
+  admin_password = var.admin_password
+
+  tags = {
+    environment = "dev"
+    owner       = "darshan"
+  }
 }
