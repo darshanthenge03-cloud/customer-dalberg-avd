@@ -1,3 +1,7 @@
+########################################
+# Terraform + Backend
+########################################
+
 terraform {
   required_providers {
     azurerm = {
@@ -14,17 +18,43 @@ terraform {
   }
 }
 
+########################################
+# Azure Provider
+########################################
+
 provider "azurerm" {
   features {}
 }
 
+########################################
+# Local Values
+########################################
+
 locals {
+
+  ########################################
+  # Customer + Environment
+  ########################################
+
   client_name   = "dalberg"
   environment   = "dev"
+
+  ########################################
+  # Azure Region
+  ########################################
+
   location      = "Central India"
   location_code = "cin"
 
+  ########################################
+  # Naming Prefix
+  ########################################
+
   prefix = "${local.client_name}-${local.environment}-${local.location_code}"
+
+  ########################################
+  # Common Tags
+  ########################################
 
   tags = {
     client      = local.client_name
@@ -32,6 +62,10 @@ locals {
     managed_by  = "terraform"
   }
 }
+
+########################################
+# Resource Groups
+########################################
 
 resource "azurerm_resource_group" "network" {
   name     = "${local.prefix}-rg-network"
@@ -47,44 +81,97 @@ resource "azurerm_resource_group" "avd" {
   tags = local.tags
 }
 
+########################################
+# Network Module
+########################################
+
 module "network" {
-  source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//network"
+
+  # During development use local path
+  source = "../../modules/network"
 
   resource_group_name = azurerm_resource_group.network.name
   location            = local.location
 
+  ########################################
+  # VNET
+  ########################################
+
   vnet_name = "${local.prefix}-vnet"
   vnet_cidr = "10.0.0.0/16"
 
+  ########################################
+  # Subnets
+  ########################################
+
   subnets = {
-    "${local.prefix}-snet-avd"      = "10.0.1.0/24"
-    "${local.prefix}-snet-ad"       = "10.0.2.0/24"
-    "${local.prefix}-snet-bastion"  = "10.0.3.0/27"
-    "GatewaySubnet"                 = "10.0.4.0/27"
+
+    # AVD Session Hosts
+    "${local.prefix}-snet-avd" = "10.0.1.0/24"
+
+    # Domain Controllers
+    "${local.prefix}-snet-ad" = "10.0.2.0/24"
+
+    # Bastion
+    "${local.prefix}-snet-bastion" = "10.0.3.0/27"
+
+    # VPN Gateway
+    "GatewaySubnet" = "10.0.4.0/27"
   }
 
   tags = local.tags
 }
 
+########################################
+# AVD Module
+########################################
+
 module "avd" {
-  source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//avd"
+
+  # During development use local path
+  source = "../../modules/avd"
+
+  ########################################
+  # Networking
+  ########################################
 
   subnet_id = module.network.subnet_ids["${local.prefix}-snet-avd"]
+
+  ########################################
+  # AVD Naming
+  ########################################
 
   host_pool_name = "${local.prefix}-avd-hp"
   app_group_name = "${local.prefix}-avd-dag"
   workspace_name = "${local.prefix}-avd-ws"
 
+  ########################################
+  # Resource Group + Region
+  ########################################
+
   resource_group_name = azurerm_resource_group.avd.name
   location            = local.location
+
+  ########################################
+  # Session Hosts
+  ########################################
 
   vm_name_prefix = "${local.prefix}-avd-vm"
 
   session_host_count = 1
-  vm_size            = "Standard_D4s_v5"
+
+  vm_size = "Standard_D4s_v5"
+
+  ########################################
+  # Credentials
+  ########################################
 
   admin_username = var.admin_username
   admin_password = var.admin_password
+
+  ########################################
+  # Tags
+  ########################################
 
   tags = local.tags
 }
