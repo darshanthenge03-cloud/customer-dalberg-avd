@@ -1,8 +1,14 @@
+########################################
+# VM Credentials
+########################################
+
 variable "admin_username" {
-  type = string
+  description = "Local administrator username for AVD session hosts"
+  type        = string
 }
 
 variable "admin_password" {
-  type      = string
-  sensitive = true
+  description = "Local administrator password for AVD session hosts"
+  type        = string
+  sensitive   = true
 }
