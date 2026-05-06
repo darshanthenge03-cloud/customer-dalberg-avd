@@ -2,9 +2,9 @@
 
 # ☁️ Dalberg Azure Virtual Desktop Platform
 
-### Terraform-based Azure Virtual Desktop deployment on Microsoft Azure
+### Automated Azure Virtual Desktop deployment using Terraform and GitHub Actions
 
-Deployment automation using Terraform, GitHub Actions, and reusable infrastructure modules.
+Modern infrastructure deployment for Azure Virtual Desktop environments using reusable Terraform modules and CI/CD automation.
 
 <br>
 
@@ -17,7 +17,7 @@ Deployment automation using Terraform, GitHub Actions, and reusable infrastructu
 
 <br>
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0078D4,100:7C4DFF&height=120&section=header&text=Azure%20Virtual%20Desktop&fontSize=32&fontColor=ffffff&animation=fadeIn"/>
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0078D4,100:7C4DFF&height=130&section=header&text=Azure%20Virtual%20Desktop&fontSize=34&fontColor=ffffff&animation=fadeIn"/>
 
 </div>
 
@@ -26,10 +26,11 @@ Deployment automation using Terraform, GitHub Actions, and reusable infrastructu
 <div align="center">
 
 [Overview](#overview) •
-[Architecture](#enterprise-architecture) •
-[Networking](#network-architecture) •
-[Deployment](#deployment) •
-[Security](#security-recommendations)
+[Architecture](#-enterprise-architecture) •
+[Networking](#-network-architecture) •
+[CI/CD](#-cicd-workflow) •
+[Deployment](#-deployment-steps) •
+[Security](#-security-recommendations)
 
 </div>
 
@@ -45,25 +46,25 @@ Deployment automation using Terraform, GitHub Actions, and reusable infrastructu
 
 ---
 
-# Overview
+# 📌 Overview
 
 This repository contains the customer deployment configuration for the Dalberg Azure Virtual Desktop environment.
 
-Deployment components used in this environment:
+The deployment is built using:
 
 - Terraform Infrastructure as Code
 - GitHub Actions CI/CD automation
 - Azure remote backend state management
 - Reusable Terraform modules
-- Dedicated networking architecture for AVD workloads
+- Dedicated network segmentation for AVD workloads
 
 > [!NOTE]
-> This repository only contains customer deployment logic and environment configuration.  
+> This repository contains only customer deployment logic and environment-specific configuration.  
 > Shared Terraform modules are maintained separately.
 
 ---
 
-# Project Goals
+# 🎯 Platform Objectives
 
 - Standardized Azure Virtual Desktop deployment
 - Reusable infrastructure deployment model
@@ -74,7 +75,7 @@ Deployment components used in this environment:
 
 ---
 
-# Enterprise Architecture
+# 🏗 Enterprise Architecture
 
 ## High-Level Architecture
 
@@ -110,13 +111,13 @@ Deployment components used in this environment:
 
 <div align="center">
 
-Built using reusable Terraform modules and GitHub Actions automation.
+Built using reusable Terraform modules and GitHub Actions workflows.
 
 </div>
 
 ---
 
-# Repository Structure
+# 📂 Repository Structure
 
 ```text
 customer-dalberg-avd/
@@ -135,7 +136,7 @@ customer-dalberg-avd/
 
 ---
 
-# Deployment
+# ⚙️ Deployment Architecture
 
 This repository is responsible for:
 
@@ -145,7 +146,7 @@ This repository is responsible for:
 - GitHub Actions deployment workflows
 - Reusable module consumption
 
-Reusable infrastructure components are maintained separately in:
+Reusable infrastructure modules are maintained separately in:
 
 ```text
 terraform-azure-modules
@@ -153,7 +154,7 @@ terraform-azure-modules
 
 ---
 
-# Network Architecture
+# 🌐 Network Architecture
 
 ## Virtual Network
 
@@ -187,7 +188,7 @@ dalberg-dev-cin-vnet
 
 ---
 
-# Azure Virtual Desktop Components
+# 🖥 Azure Virtual Desktop Components
 
 ## Host Pool
 
@@ -196,7 +197,7 @@ dalberg-dev-cin-vnet
 | Type | Pooled |
 | Load Balancer | DepthFirst |
 
-Example:
+### Example
 
 ```text
 dalberg-dev-cin-avd-hp
@@ -220,9 +221,9 @@ dalberg-dev-cin-avd-dag
 
 ---
 
-# Session Hosts
+# 💻 Session Hosts
 
-Windows 11 multi-session virtual machines are deployed as session hosts.
+Windows 11 multi-session virtual machines are deployed as AVD session hosts.
 
 | Component | Configuration |
 |---|---|
@@ -231,7 +232,7 @@ Windows 11 multi-session virtual machines are deployed as session hosts.
 | Disk Type | Standard SSD |
 | Session Host Count | Configurable |
 
-Example:
+### Example
 
 ```text
 dalberg-dev-cin-avd-vm-01
@@ -239,7 +240,7 @@ dalberg-dev-cin-avd-vm-01
 
 ---
 
-# Naming Convention
+# 🏷 Naming Convention
 
 ```text
 <client>-<environment>-<region>-<service>-<resource>
@@ -257,7 +258,7 @@ dalberg-dev-cin-avd-vm-01
 
 ---
 
-# Terraform Backend
+# 🗄 Terraform Backend
 
 Terraform state is stored remotely in Azure Storage Account.
 
@@ -269,17 +270,17 @@ Terraform state is stored remotely in Azure Storage Account.
 
 ---
 
-# CI/CD Workflow
+# 🚀 CI/CD Workflow
 
 GitHub Actions is used for infrastructure deployment automation.
 
-Workflow location:
+### Workflow Location
 
 ```text
 .github/workflows/terraform.yml
 ```
 
-Deployment pipeline:
+### Deployment Pipeline
 
 ```text
 Repository Checkout
@@ -299,7 +300,7 @@ Terraform Apply
 
 ---
 
-# GitHub Secrets
+# 🔑 GitHub Secrets
 
 | Secret | Purpose |
 |---|---|
@@ -309,7 +310,7 @@ Terraform Apply
 
 ---
 
-# Deployment Steps
+# 🚀 Deployment Steps
 
 ## Clone Repository
 
@@ -322,6 +323,8 @@ cd customer-dalberg-avd
 
 Configure all required repository secrets before deployment.
 
+---
+
 ## Push Changes
 
 ```bash
@@ -330,6 +333,8 @@ git commit -m "Deploy Dalberg AVD infrastructure"
 git push
 ```
 
+---
+
 ## Monitor Deployment
 
 ```text
@@ -337,6 +342,8 @@ GitHub
 → Actions
 → Terraform Deploy
 ```
+
+---
 
 ## Validate Resources
 
@@ -355,7 +362,7 @@ Available
 
 ---
 
-# Common Issues
+# 🛠 Common Issues
 
 ## VM Name Length Limitation
 
@@ -387,7 +394,7 @@ Recommended approach:
 
 ---
 
-# Security Recommendations
+# 🔐 Security Recommendations
 
 - Store credentials in GitHub Secrets
 - Avoid committing secrets to Git
@@ -398,7 +405,7 @@ Recommended approach:
 
 ---
 
-# Technologies Used
+# 🧰 Technologies Used
 
 | Technology | Purpose |
 |---|---|
@@ -411,7 +418,7 @@ Recommended approach:
 
 ---
 
-# Author
+# 👨‍💻 Author
 
 **Darshan Thenge**  
 Cloud Engineer focused on Azure, Terraform, DevOps, and Infrastructure Automation.
