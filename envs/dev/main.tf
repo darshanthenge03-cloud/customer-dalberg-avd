@@ -69,13 +69,22 @@ module "network" {
 module "avd" {
   source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//avd"
 
-  host_pool_name      = "avd-hostpool-dev"
-  app_group_name      = "avd-dag-dev"
-  workspace_name      = "avd-workspace-dev"
-  resource_group_name = "rg-avd-dev"
-  location            = "Central India"
+  subnet_id = module.network.subnet_ids["${local.prefix}-snet-avd"]
 
-  max_sessions = 10
+  host_pool_name = "${local.prefix}-avd-hp"
+  app_group_name = "${local.prefix}-avd-dag"
+  workspace_name = "${local.prefix}-avd-ws"
+
+  resource_group_name = azurerm_resource_group.avd.name
+  location            = local.location
+
+  vm_name_prefix = "${local.prefix}-avd-vm"
+
+  session_host_count = 1
+  vm_size            = "Standard_D4s_v5"
+
+  admin_username = var.admin_username
+  admin_password = var.admin_password
 
   tags = local.tags
 }
