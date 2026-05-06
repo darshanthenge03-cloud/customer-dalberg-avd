@@ -418,7 +418,7 @@ Recommended approach:
 
 ---
 
-# <img width="28" src="https://img.icons8.com/fluency/48/developer.png"/> Author
+# <img width="28" src="https://img.icons8.com/fluency/48/administrator-male.png"/> Author
 
 **Darshan Thenge**  
 Cloud Engineer focused on Azure, Terraform, DevOps, and Infrastructure Automation.
