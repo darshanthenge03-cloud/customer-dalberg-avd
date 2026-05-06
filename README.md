@@ -80,24 +80,26 @@ The environment is fully automated using:
 ### High-Level Architecture
 
 ```mermaid
-flowchart TD
+flowchart TB
 
-    A[Azure Subscription] --> B[Networking Resource Group]
-    A --> C[AVD Resource Group]
+    A[Azure Subscription]
+
+    A --> B[Networking Resource Group]
+    A --> C[Azure Virtual Desktop Resource Group]
     A --> D[Terraform Backend]
 
     B --> E[Virtual Network]
-    B --> F[Subnet Architecture]
+    B --> F[AVD Subnet]
+    B --> G[ADDS Subnet]
+    B --> H[Bastion Subnet]
 
-    C --> G[Host Pool]
-    C --> H[Workspace]
-    C --> I[Desktop Application Group]
-    C --> J[Session Hosts]
+    C --> I[Host Pool]
+    C --> J[Workspace]
+    C --> K[Desktop Application Group]
+    C --> L[Session Host Virtual Machines]
 
-    D --> K[Azure Storage Account]
+    D --> M[Azure Storage Account]
 ```
-
----
 
 ## 📂 Repository Structure
 
