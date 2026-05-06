@@ -1,4 +1,3 @@
-````md
 <div align="center">
 
 # ☁️ Dalberg Azure Virtual Desktop Platform
@@ -595,4 +594,3 @@ Cloud Engineer specializing in:
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:623CE4,100:0078D4&height=70&section=footer"/>
 
 </div>
-````
