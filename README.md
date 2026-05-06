@@ -79,26 +79,26 @@ The environment is fully automated using:
 
 ### High-Level Architecture
 
-```mermaid
-flowchart TB
+```text
+┌──────────────────────────────────────────────┐
+│             Azure Subscription              │
+└──────────────────────────────────────────────┘
+                     │
+     ┌───────────────┼────────────────┐
+     │               │                │
+     ▼               ▼                ▼
 
-    A[Azure Subscription]
+┌────────────────┐ ┌────────────────┐ ┌────────────────┐
+│ Networking RG  │ │   AVD RG       │ │ Terraform State│
+└────────────────┘ └────────────────┘ └────────────────┘
+        │                   │                   │
+        ▼                   ▼                   ▼
 
-    A --> B[Networking Resource Group]
-    A --> C[Azure Virtual Desktop Resource Group]
-    A --> D[Terraform Backend]
-
-    B --> E[Virtual Network]
-    B --> F[AVD Subnet]
-    B --> G[ADDS Subnet]
-    B --> H[Bastion Subnet]
-
-    C --> I[Host Pool]
-    C --> J[Workspace]
-    C --> K[Desktop Application Group]
-    C --> L[Session Host Virtual Machines]
-
-    D --> M[Azure Storage Account]
+• Virtual Network     • Host Pool         • Storage Account
+• AVD Subnet          • Workspace
+• ADDS Subnet         • App Group
+• Bastion Subnet      • Session Hosts
+• GatewaySubnet
 ```
 
 ## 📂 Repository Structure
