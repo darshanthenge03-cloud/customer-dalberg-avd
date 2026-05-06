@@ -4,30 +4,55 @@
 
 ### Enterprise-Scale Azure Virtual Desktop Deployment Framework
 
-<p align="center">
 Modern Infrastructure Automation powered by Terraform, GitHub Actions & Microsoft Azure
-</p>
 
 <br>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Azure-Cloud_Platform-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Terraform-Infrastructure_as_Code-623CE4?style=for-the-badge&logo=terraform&logoColor=white"/>
-  <img src="https://img.shields.io/badge/GitHub_Actions-CI/CD_Automation-2088FF?style=for-the-badge&logo=githubactions&logoColor=white"/>
-  <img src="https://img.shields.io/badge/AVD-Enterprise_Deployment-0A66C2?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Terraform-623CE4?style=flat-square&logo=terraform&logoColor=white"/>
+  <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white"/>
+  <img src="https://img.shields.io/badge/AVD-Enterprise-blue?style=flat-square"/>
 </p>
 
 <br>
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0078D4,100:623CE4&height=180&section=header&text=Azure%20Virtual%20Desktop&fontSize=40&fontColor=ffffff&animation=fadeIn"/>
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0078D4,100:623CE4&height=120&section=header&text=Azure%20Virtual%20Desktop&fontSize=32&fontColor=ffffff&animation=fadeIn"/>
 
 </div>
 
 ---
 
-# 📌 Platform Overview
+<div align="center">
 
-This repository contains the **customer-specific deployment configuration** for the **Dalberg Azure Virtual Desktop (AVD) Platform**.
+[Overview](#-platform-overview) •
+[Architecture](#-enterprise-architecture) •
+[Networking](#-network-architecture) •
+[CI/CD](#-cicd-automation) •
+[Deployment](#-deployment-steps) •
+[Security](#-security-recommendations)
+
+</div>
+
+<br>
+
+<div align="center">
+
+| Environment | IaC | CI/CD | Platform |
+|---|---|---|---|
+| Development | Terraform | GitHub Actions | Azure Virtual Desktop |
+
+</div>
+
+---
+
+## 📌 Platform Overview
+
+> [!IMPORTANT]
+> This repository contains only customer deployment logic.  
+> Reusable Terraform modules are maintained separately.
+
+This repository contains the customer-specific deployment configuration for the **Dalberg Azure Virtual Desktop (AVD) Platform**.
 
 The environment is fully automated using:
 
@@ -35,50 +60,46 @@ The environment is fully automated using:
 - 🔁 Reusable Enterprise Terraform Modules
 - 🚀 GitHub Actions CI/CD Pipelines
 - ☁️ Azure Remote Backend State Management
-- 🔒 Enterprise Network Segmentation & Security Standards
+- 🔒 Enterprise Network Segmentation
 
 ---
 
-# 🎯 Project Objectives
+## 🎯 Project Objectives
 
 ✔ Standardized AVD Deployments  
 ✔ Multi-Customer Scalable Architecture  
 ✔ Reusable Infrastructure Modules  
 ✔ Centralized CI/CD Automation  
 ✔ Enterprise Naming Standards  
-✔ Secure & Segmented Networking  
-✔ Future-Ready Platform Design  
+✔ Secure Networking Design  
 
 ---
 
-# 🏗️ Enterprise Architecture
+## 🏗 Enterprise Architecture
 
-## 🔷 High-Level Architecture
+### High-Level Architecture
 
-```text
-Azure Subscription
-│
-├── Networking Resource Group
-│   ├── Virtual Network
-│   ├── AVD Subnet
-│   ├── ADDS Subnet
-│   ├── Bastion Subnet
-│   └── GatewaySubnet
-│
-├── Azure Virtual Desktop Resource Group
-│   ├── Host Pool
-│   ├── Workspace
-│   ├── Desktop Application Group
-│   ├── Session Host VMs
-│   └── Network Interfaces
-│
-└── Terraform Backend
-    └── Azure Storage Account
+```mermaid
+flowchart TD
+
+    A[Azure Subscription] --> B[Networking Resource Group]
+    A --> C[AVD Resource Group]
+    A --> D[Terraform Backend]
+
+    B --> E[Virtual Network]
+    B --> F[Subnet Architecture]
+
+    C --> G[Host Pool]
+    C --> H[Workspace]
+    C --> I[Desktop Application Group]
+    C --> J[Session Hosts]
+
+    D --> K[Azure Storage Account]
 ```
 
 ---
 
-# 📂 Repository Structure
+## 📂 Repository Structure
 
 ```text
 customer-dalberg-avd/
@@ -97,19 +118,19 @@ customer-dalberg-avd/
 
 ---
 
-# ⚙️ Deployment Architecture
+## ⚙️ Deployment Architecture
 
-This repository is responsible only for:
+This repository is responsible for:
 
 - Customer deployment configuration
-- Environment variables
-- CI/CD workflow execution
+- Environment-specific variables
 - Terraform backend configuration
-- Calling reusable Terraform modules
+- CI/CD execution workflows
+- Reusable module consumption
 
 ---
 
-# 🧩 Reusable Module Strategy
+## 🧩 Reusable Module Strategy
 
 Reusable infrastructure components are maintained separately in:
 
@@ -117,23 +138,23 @@ Reusable infrastructure components are maintained separately in:
 terraform-azure-modules
 ```
 
-This architecture enables:
+### Benefits
 
 | Capability | Benefit |
 |---|---|
-| Reusable Modules | Reduced duplication |
-| Centralized Logic | Easier maintenance |
-| Multi-Customer Deployments | Faster onboarding |
-| Standardized CI/CD | Operational consistency |
-| Platform Engineering Model | Enterprise scalability |
+| 🔁 Reusable Modules | Reduced duplication |
+| 🏗 Centralized Logic | Easier maintenance |
+| 🚀 Multi-Customer Deployments | Faster onboarding |
+| ⚡ Standardized CI/CD | Operational consistency |
+| ☁️ Platform Engineering Model | Enterprise scalability |
 
 ---
 
-# 🌐 Network Architecture
+## 🌐 Network Architecture
 
-## 🔹 Virtual Network
+### Virtual Network
 
-Dedicated Azure Virtual Network for the AVD platform.
+Dedicated Azure Virtual Network for Azure Virtual Desktop workloads.
 
 ### Example
 
@@ -149,7 +170,7 @@ dalberg-dev-cin-vnet
 
 ---
 
-# 🛡️ Subnet Segmentation
+## 🛡️ Subnet Segmentation
 
 | Subnet | Purpose |
 |---|---|
@@ -160,9 +181,9 @@ dalberg-dev-cin-vnet
 
 ---
 
-# 🔐 Why Dedicated Subnets?
+## 🔐 Why Dedicated Subnets?
 
-Enterprise subnet segmentation provides:
+Subnet segmentation provides:
 
 - Better workload isolation
 - Easier NSG management
@@ -174,30 +195,30 @@ Enterprise subnet segmentation provides:
 
 ---
 
-# 🖥️ Azure Virtual Desktop Components
+## 🖥 Azure Virtual Desktop Components
 
-## 🔷 Host Pool
+### 🔷 Host Pool
 
 Distributes user sessions across session hosts.
 
-### Example
+#### Example
 
 ```text
 dalberg-dev-cin-avd-hp
 ```
 
-| Setting | Value |
+| Component | Configuration |
 |---|---|
 | Type | Pooled |
 | Load Balancer | DepthFirst |
 
 ---
 
-## 🔷 Workspace
+### 🔷 Workspace
 
-User access entry point for Azure Virtual Desktop resources.
+Acts as the user access entry point for AVD resources.
 
-### Example
+#### Example
 
 ```text
 dalberg-dev-cin-avd-ws
@@ -205,11 +226,11 @@ dalberg-dev-cin-avd-ws
 
 ---
 
-## 🔷 Desktop Application Group
+### 🔷 Desktop Application Group
 
-Publishes desktop access to end users.
+Publishes desktop access to users.
 
-### Example
+#### Example
 
 ```text
 dalberg-dev-cin-avd-dag
@@ -217,7 +238,7 @@ dalberg-dev-cin-avd-dag
 
 ---
 
-# 💻 Session Hosts
+## 💻 Session Hosts
 
 Windows 11 multi-session VMs deployed as AVD Session Hosts.
 
@@ -229,7 +250,7 @@ dalberg-dev-cin-avd-vm-01
 
 ---
 
-## VM Configuration
+### VM Configuration
 
 | Component | Configuration |
 |---|---|
@@ -240,9 +261,9 @@ dalberg-dev-cin-avd-vm-01
 
 ---
 
-# 🏷️ Naming Standards
+## 🏷 Naming Standards
 
-## Naming Convention
+### Naming Convention
 
 ```text
 <client>-<environment>-<region>-<service>-<resource>
@@ -250,7 +271,7 @@ dalberg-dev-cin-avd-vm-01
 
 ---
 
-## Examples
+### Examples
 
 | Resource | Example |
 |---|---|
@@ -258,11 +279,11 @@ dalberg-dev-cin-avd-vm-01
 | Virtual Network | dalberg-dev-cin-vnet |
 | Host Pool | dalberg-dev-cin-avd-hp |
 | Workspace | dalberg-dev-cin-avd-ws |
-| VM | dalberg-dev-cin-avd-vm-01 |
+| Virtual Machine | dalberg-dev-cin-avd-vm-01 |
 
 ---
 
-# 🌍 Region Standards
+## 🌍 Region Standards
 
 | Code | Azure Region |
 |---|---|
@@ -272,11 +293,11 @@ dalberg-dev-cin-avd-vm-01
 
 ---
 
-# 🗄️ Terraform Remote Backend
+## 🗄 Terraform Remote Backend
 
 Terraform state is securely stored in Azure Storage Account.
 
-## Benefits
+### Benefits
 
 - Remote state management
 - State locking
@@ -286,9 +307,9 @@ Terraform state is securely stored in Azure Storage Account.
 
 ---
 
-## Backend Configuration
+### Backend Configuration
 
-| Component | Value |
+| Component | Configuration |
 |---|---|
 | Resource Group | rg-dalberg-terraform-state |
 | Storage Account | tfstatedalbergdevstr |
@@ -296,13 +317,13 @@ Terraform state is securely stored in Azure Storage Account.
 
 ---
 
-# 🚀 CI/CD Automation
+## 🚀 CI/CD Automation
 
 Infrastructure deployment is fully automated using GitHub Actions.
 
 ---
 
-## Workflow Location
+### Workflow Location
 
 ```text
 .github/workflows/terraform.yml
@@ -310,7 +331,7 @@ Infrastructure deployment is fully automated using GitHub Actions.
 
 ---
 
-# 🔄 Deployment Workflow
+### Deployment Workflow
 
 ```text
 Repository Checkout
@@ -330,7 +351,7 @@ Terraform Apply
 
 ---
 
-# 🔑 Required GitHub Secrets
+## 🔑 Required GitHub Secrets
 
 | Secret | Purpose |
 |---|---|
@@ -340,7 +361,7 @@ Terraform Apply
 
 ---
 
-# 🔒 Required Azure Permissions
+## 🔒 Required Azure Permissions
 
 | Role | Scope |
 |---|---|
@@ -349,9 +370,9 @@ Terraform Apply
 
 ---
 
-# 🚀 Deployment Steps
+## 🚀 Deployment Steps
 
-## 1️⃣ Clone Repository
+### 1️⃣ Clone Repository
 
 ```bash
 git clone <repository-url>
@@ -360,13 +381,13 @@ cd customer-dalberg-avd
 
 ---
 
-## 2️⃣ Configure GitHub Secrets
+### 2️⃣ Configure GitHub Secrets
 
 Configure all required repository secrets.
 
 ---
 
-## 3️⃣ Push Infrastructure Changes
+### 3️⃣ Push Infrastructure Changes
 
 ```bash
 git add .
@@ -376,7 +397,7 @@ git push
 
 ---
 
-## 4️⃣ Monitor GitHub Actions
+### 4️⃣ Monitor GitHub Actions
 
 ```text
 GitHub
@@ -392,7 +413,7 @@ Verify:
 
 ---
 
-## 5️⃣ Validate Deployment
+### 5️⃣ Validate Deployment
 
 ```text
 Azure Portal
@@ -409,22 +430,22 @@ Available
 
 ---
 
-# ✨ Current Features
+## ✨ Current Features
 
 - Reusable Terraform modules
 - Enterprise naming conventions
 - Dynamic subnet architecture
 - Azure Virtual Desktop deployment
-- Session Host provisioning
+- Session host provisioning
 - GitHub Actions automation
 - Azure remote backend
 - Multi-customer deployment model
 
 ---
 
-# 🧠 Key Design Decisions
+## 🧠 Key Design Decisions
 
-## 🔷 Separate Module Repository
+### 🔷 Separate Module Repository
 
 Infrastructure modules are maintained separately to provide:
 
@@ -436,7 +457,7 @@ Infrastructure modules are maintained separately to provide:
 
 ---
 
-## 🔷 Dedicated AVD Subnet
+### 🔷 Dedicated AVD Subnet
 
 Provides:
 
@@ -447,7 +468,7 @@ Provides:
 
 ---
 
-## 🔷 Future ADDS Integration
+### 🔷 Future ADDS Integration
 
 Architecture supports future integration with:
 
@@ -458,7 +479,7 @@ Architecture supports future integration with:
 
 ---
 
-# 🔮 Planned Enhancements
+## 🔮 Planned Enhancements
 
 - Active Directory Domain Services
 - FSLogix Profile Containers
@@ -473,33 +494,33 @@ Architecture supports future integration with:
 
 ---
 
-# 🛠️ Common Issues
+## 🛠 Common Issues
 
-## VM Name Length Limitation
+### VM Name Length Limitation
 
 Windows computer names support a maximum of 15 characters.
 
-### Resolution
+#### Resolution
 
 Use separate `computer_name` values for Windows hostnames.
 
 ---
 
-## GatewaySubnet Restriction
+### GatewaySubnet Restriction
 
 Azure does not allow NSG association to `GatewaySubnet`.
 
-### Resolution
+#### Resolution
 
 Exclude `GatewaySubnet` from NSG association logic.
 
 ---
 
-## Terraform State Conflicts
+### Terraform State Conflicts
 
 Occurs when resources already exist outside Terraform state.
 
-### Resolution
+#### Resolution
 
 - Use remote backend state
 - Avoid manual deployments
@@ -507,33 +528,33 @@ Occurs when resources already exist outside Terraform state.
 
 ---
 
-# 🔐 Security Recommendations
+## 🔐 Security Recommendations
 
 - Never commit credentials to Git
-- Use GitHub Secrets
+- Store secrets in GitHub Secrets
 - Use remote backend state
-- Apply subnet segmentation
-- Implement NSGs
+- Use subnet segmentation
+- Apply NSGs
 - Follow least privilege access
 
 ---
 
-# 🧰 Technologies Used
+## 🧰 Technologies Used
 
 | Technology | Purpose |
 |---|---|
-| Terraform | Infrastructure as Code |
-| Azure Virtual Desktop | Virtual Desktop Platform |
-| Azure Networking | Enterprise Networking |
-| GitHub Actions | CI/CD Automation |
-| Azure Resource Manager | Infrastructure Deployment |
-| Azure Storage Account | Remote Terraform Backend |
+| ☁️ Azure | Cloud Platform |
+| 🏗 Terraform | Infrastructure as Code |
+| 🚀 GitHub Actions | CI/CD Automation |
+| 🖥 Azure Virtual Desktop | Desktop Virtualization |
+| 🌐 Azure Networking | Enterprise Networking |
+| 🗄 Azure Storage Account | Remote Terraform Backend |
 
 ---
 
-# 👨‍💻 Author
+## 👨‍💻 Author
 
-## Darshan Thenge
+### Darshan Thenge
 
 Cloud Engineer specializing in:
 
@@ -552,6 +573,6 @@ Cloud Engineer specializing in:
 
 <br>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:623CE4,100:0078D4&height=120&section=footer"/>
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:623CE4,100:0078D4&height=70&section=footer"/>
 
 </div>
