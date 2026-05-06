@@ -88,7 +88,7 @@ resource "azurerm_resource_group" "avd" {
 module "network" {
 
   # During development use local path
-  source = "../../modules/network"
+  source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//network"
 
   resource_group_name = azurerm_resource_group.network.name
   location            = local.location
@@ -129,7 +129,7 @@ module "network" {
 module "avd" {
 
   # During development use local path
-  source = "../../modules/avd"
+  source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//avd"
 
   ########################################
   # Networking
