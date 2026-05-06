@@ -10,7 +10,7 @@ Modern infrastructure deployment for Azure Virtual Desktop environments using re
 
 <p align="center">
   <img src="https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Terraform-623CE4?style=flat-square&logo=terraform&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Terraform-623CE4?style=flat-square&logo=terraform"/>
   <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white"/>
   <img src="https://img.shields.io/badge/Azure_Virtual_Desktop-0A66C2?style=flat-square"/>
 </p>
@@ -425,6 +425,14 @@ Cloud Engineer focused on Azure, Terraform, DevOps, and Infrastructure Automatio
 
 GitHub:  
 https://github.com/darshanthenge03-cloud
+
+<br>
+
+### Core Stack
+
+<p>
+  <img src="https://skillicons.dev/icons?i=azure,aws,terraform,githubactions,gitlab,azuredevops,powershell,vscode" />
+</p>
 
 ---
 
