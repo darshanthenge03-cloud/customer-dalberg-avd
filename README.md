@@ -25,7 +25,7 @@ Modern infrastructure deployment for Azure Virtual Desktop environments using re
 
 <div align="center">
 
-[Overview](#overview) •
+[Overview](#-overview) •
 [Architecture](#-enterprise-architecture) •
 [Networking](#-network-architecture) •
 [CI/CD](#-cicd-workflow) •
@@ -46,7 +46,7 @@ Modern infrastructure deployment for Azure Virtual Desktop environments using re
 
 ---
 
-# 📌 Overview
+# <img width="28" src="https://img.icons8.com/fluency/48/document.png"/> Overview
 
 This repository contains the customer deployment configuration for the Dalberg Azure Virtual Desktop environment.
 
@@ -64,7 +64,7 @@ The deployment is built using:
 
 ---
 
-# 🎯 Platform Objectives
+# <img width="28" src="https://img.icons8.com/fluency/48/goal.png"/> Platform Objectives
 
 - Standardized Azure Virtual Desktop deployment
 - Reusable infrastructure deployment model
@@ -75,7 +75,7 @@ The deployment is built using:
 
 ---
 
-# 🏗 Enterprise Architecture
+# <img width="28" src="https://img.icons8.com/fluency/48/system-task.png"/> Enterprise Architecture
 
 ## High-Level Architecture
 
@@ -117,7 +117,7 @@ Built using reusable Terraform modules and GitHub Actions workflows.
 
 ---
 
-# 📂 Repository Structure
+# <img width="28" src="https://img.icons8.com/fluency/48/opened-folder.png"/> Repository Structure
 
 ```text
 customer-dalberg-avd/
@@ -136,7 +136,7 @@ customer-dalberg-avd/
 
 ---
 
-# ⚙️ Deployment Architecture
+# <img width="28" src="https://img.icons8.com/fluency/48/settings.png"/> Deployment Architecture
 
 This repository is responsible for:
 
@@ -154,7 +154,7 @@ terraform-azure-modules
 
 ---
 
-# 🌐 Network Architecture
+# <img width="28" src="https://img.icons8.com/fluency/48/networking-manager.png"/> Network Architecture
 
 ## Virtual Network
 
@@ -188,7 +188,7 @@ dalberg-dev-cin-vnet
 
 ---
 
-# 🖥 Azure Virtual Desktop Components
+# <img width="28" src="https://img.icons8.com/fluency/48/monitor.png"/> Azure Virtual Desktop Components
 
 ## Host Pool
 
@@ -221,7 +221,7 @@ dalberg-dev-cin-avd-dag
 
 ---
 
-# 💻 Session Hosts
+# <img width="28" src="https://img.icons8.com/fluency/48/laptop.png"/> Session Hosts
 
 Windows 11 multi-session virtual machines are deployed as AVD session hosts.
 
@@ -240,7 +240,7 @@ dalberg-dev-cin-avd-vm-01
 
 ---
 
-# 🏷 Naming Convention
+# <img width="28" src="https://img.icons8.com/fluency/48/price-tag.png"/> Naming Convention
 
 ```text
 <client>-<environment>-<region>-<service>-<resource>
@@ -258,7 +258,7 @@ dalberg-dev-cin-avd-vm-01
 
 ---
 
-# 🗄 Terraform Backend
+# <img width="28" src="https://img.icons8.com/fluency/48/database.png"/> Terraform Backend
 
 Terraform state is stored remotely in Azure Storage Account.
 
@@ -270,7 +270,7 @@ Terraform state is stored remotely in Azure Storage Account.
 
 ---
 
-# 🚀 CI/CD Workflow
+# <img width="28" src="https://img.icons8.com/fluency/48/process.png"/> CI/CD Workflow
 
 GitHub Actions is used for infrastructure deployment automation.
 
@@ -300,7 +300,7 @@ Terraform Apply
 
 ---
 
-# 🔑 GitHub Secrets
+# <img width="28" src="https://img.icons8.com/fluency/48/key-security.png"/> GitHub Secrets
 
 | Secret | Purpose |
 |---|---|
@@ -310,7 +310,7 @@ Terraform Apply
 
 ---
 
-# 🚀 Deployment Steps
+# <img width="28" src="https://img.icons8.com/fluency/48/rocket.png"/> Deployment Steps
 
 ## Clone Repository
 
@@ -362,7 +362,7 @@ Available
 
 ---
 
-# 🛠 Common Issues
+# <img width="28" src="https://img.icons8.com/fluency/48/maintenance.png"/> Common Issues
 
 ## VM Name Length Limitation
 
@@ -394,7 +394,7 @@ Recommended approach:
 
 ---
 
-# 🔐 Security Recommendations
+# <img width="28" src="https://img.icons8.com/fluency/48/lock.png"/> Security Recommendations
 
 - Store credentials in GitHub Secrets
 - Avoid committing secrets to Git
@@ -405,7 +405,7 @@ Recommended approach:
 
 ---
 
-# 🧰 Technologies Used
+# <img width="28" src="https://img.icons8.com/fluency/48/toolbox.png"/> Technologies Used
 
 | Technology | Purpose |
 |---|---|
@@ -418,7 +418,7 @@ Recommended approach:
 
 ---
 
-# 👨‍💻 Author
+# <img width="28" src="https://img.icons8.com/fluency/48/developer.png"/> Author
 
 **Darshan Thenge**  
 Cloud Engineer focused on Azure, Terraform, DevOps, and Infrastructure Automation.
