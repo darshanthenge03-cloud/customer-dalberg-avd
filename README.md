@@ -80,25 +80,34 @@ The environment is fully automated using:
 ### High-Level Architecture
 
 ```text
-┌──────────────────────────────────────────────┐
-│             Azure Subscription              │
-└──────────────────────────────────────────────┘
-                     │
-     ┌───────────────┼────────────────┐
-     │               │                │
-     ▼               ▼                ▼
++--------------------------------------------------+
+|               Azure Subscription                 |
++--------------------------------------------------+
+                        |
+        +---------------+---------------+
+        |                               |
+        |                               |
+        v                               v
 
-┌────────────────┐ ┌────────────────┐ ┌────────────────┐
-│ Networking RG  │ │   AVD RG       │ │ Terraform State│
-└────────────────┘ └────────────────┘ └────────────────┘
-        │                   │                   │
-        ▼                   ▼                   ▼
++----------------------+     +----------------------+
+|  Networking RG       |     |     AVD RG           |
++----------------------+     +----------------------+
+| • Virtual Network    |     | • Host Pool          |
+| • AVD Subnet         |     | • Workspace          |
+| • ADDS Subnet        |     | • App Group          |
+| • Bastion Subnet     |     | • Session Hosts      |
+| • GatewaySubnet      |     |                      |
++----------------------+     +----------------------+
 
-• Virtual Network     • Host Pool         • Storage Account
-• AVD Subnet          • Workspace
-• ADDS Subnet         • App Group
-• Bastion Subnet      • Session Hosts
-• GatewaySubnet
+                |
+                v
+
++----------------------------------------------+
+|           Terraform Backend                  |
++----------------------------------------------+
+| • Azure Storage Account                      |
+| • Remote Terraform State                     |
++----------------------------------------------+
 ```
 
 ## 📂 Repository Structure
