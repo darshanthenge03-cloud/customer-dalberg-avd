@@ -123,6 +123,72 @@ module "network" {
 }
 
 ########################################
+# Active Directory Domain Services
+########################################
+
+module "adds" {
+
+  source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//adds"
+
+  ########################################
+  # General
+  ########################################
+
+  resource_group_name = azurerm_resource_group.avd.name
+  location            = local.location
+
+  ########################################
+  # Networking
+  ########################################
+
+  subnet_id          = module.network.subnet_ids["${local.prefix}-snet-ad"]
+
+  private_ip_address = "10.0.2.4"
+
+  ########################################
+  # VM Configuration
+  ########################################
+
+  vm_name       = "${local.prefix}-dc-01"
+  computer_name = "dc01"
+
+  vm_size = "Standard_D2s_v5"
+
+  ########################################
+  # Credentials
+  ########################################
+
+  admin_username = var.admin_username
+  admin_password = var.admin_password
+
+  ########################################
+  # Active Directory
+  ########################################
+
+  domain_name        = "dalberg.local"
+  safe_mode_password = var.admin_password
+
+  ########################################
+  # Tags
+  ########################################
+
+  tags = local.tags
+}
+
+########################################
+# Configure VNet DNS
+########################################
+
+resource "azurerm_virtual_network_dns_servers" "dns" {
+
+  virtual_network_id = module.network.vnet_id
+
+  dns_servers = [
+    module.adds.private_ip_address
+  ]
+}
+
+########################################
 # AVD Module
 ########################################
 
