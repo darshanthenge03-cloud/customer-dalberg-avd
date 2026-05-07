@@ -179,14 +179,6 @@ module "adds" {
 # Configure VNet DNS
 ########################################
 
-resource "azurerm_virtual_network_dns_servers" "dns" {
-
-  virtual_network_id = module.network.vnet_id
-
-  dns_servers = [
-    module.adds.private_ip_address
-  ]
-}
 
 ########################################
 # AVD Module
