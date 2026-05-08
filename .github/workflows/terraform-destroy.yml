@@ -33,9 +33,11 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
+      - name: Terraform Force Unlock
+        run: terraform force-unlock -force 3c3eba48-d6c2-4438-dfa0-ef9a53ecd167
+
       - name: Terraform Destroy
         run: terraform destroy -auto-approve -input=false
-
         env:
           TF_VAR_admin_username: ${{ secrets.TF_VAR_admin_username }}
           TF_VAR_admin_password: ${{ secrets.TF_VAR_admin_password }}
