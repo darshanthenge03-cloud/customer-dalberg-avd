@@ -10,32 +10,36 @@ jobs:
   ########################################
   # VALIDATE STAGE
   ########################################
+  
+ validate:
+  name: Terraform Validate
+  runs-on: ubuntu-latest
 
-  validate:
-    name: Terraform Validate
-    runs-on: ubuntu-latest
+  defaults:
+    run:
+      working-directory: envs/dev
 
-    defaults:
-      run:
-        working-directory: envs/dev
+  steps:
 
-    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
 
-      - name: Checkout Code
-        uses: actions/checkout@v4
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+    - name: Azure Login
+      uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Terraform Format
-        run: terraform fmt -recursive
+    - name: Terraform Format
+      run: terraform fmt -recursive
 
-      - name: Terraform Init
-        run: terraform init
+    - name: Terraform Init
+      run: terraform init
 
-      - name: Terraform Validate
-        run: terraform validate
-
+    - name: Terraform Validate
+      run: terraform validate
 
   ########################################
   # PLAN STAGE
