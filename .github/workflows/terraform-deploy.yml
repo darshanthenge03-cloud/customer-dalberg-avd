@@ -69,6 +69,9 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
+      - name: Terraform Force Unlock
+        run: terraform force-unlock -force 64001b8e-c06c-a423-039c-cac8cc5bdf58
+
       - name: Terraform Plan
         run: terraform plan -input=false
         env:
@@ -103,9 +106,6 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-
-      - name: Terraform Force Unlock
-        run: terraform force-unlock -force 64001b8e-c06c-a423-039c-cac8cc5bdf58
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false
