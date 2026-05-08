@@ -1,4 +1,3 @@
-```yaml
 name: Terraform Deploy
 
 on:
@@ -98,4 +97,3 @@ jobs:
         env:
           TF_VAR_admin_username: ${{ secrets.TF_VAR_admin_username }}
           TF_VAR_admin_password: ${{ secrets.TF_VAR_admin_password }}
-```
