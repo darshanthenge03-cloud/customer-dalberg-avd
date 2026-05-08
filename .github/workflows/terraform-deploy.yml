@@ -1,3 +1,4 @@
+```yaml
 name: Terraform Deploy
 
 on:
@@ -6,6 +7,10 @@ on:
       - main
 
 jobs:
+
+  ########################################
+  # VALIDATE STAGE
+  ########################################
 
   validate:
     name: Terraform Validate
@@ -35,6 +40,10 @@ jobs:
 
       - name: Terraform Validate
         run: terraform validate
+
+  ########################################
+  # PLAN STAGE
+  ########################################
 
   plan:
     name: Terraform Plan
@@ -67,6 +76,10 @@ jobs:
           TF_VAR_admin_username: ${{ secrets.TF_VAR_admin_username }}
           TF_VAR_admin_password: ${{ secrets.TF_VAR_admin_password }}
 
+  ########################################
+  # APPLY STAGE
+  ########################################
+
   apply:
     name: Terraform Apply
     runs-on: ubuntu-latest
@@ -91,6 +104,9 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+
+      - name: Terraform Force Unlock
+        run: terraform force-unlock -force 64001b8e-c06c-a423-039c-cac8cc5bdf58
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false
