@@ -237,6 +237,14 @@ module "avd" {
   admin_password = var.admin_password
 
   ########################################
+  # Domain Join
+  ########################################
+
+  domain_name     = "dalberg.local"
+  domain_user     = "azureuser"
+  domain_password = var.admin_password
+
+  ########################################
   # Tags
   ########################################
 
