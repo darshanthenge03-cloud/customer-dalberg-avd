@@ -188,3 +188,65 @@ resource "azurerm_virtual_network_dns_servers" "dns" {
     "8.8.8.8"
   ]
 }
+
+########################################
+# AVD Module
+########################################
+  
+module "avd" {
+
+  # During development use local path
+  source = "git::https://github.com/darshanthenge03-cloud/terraform-azure-modules.git//avd"
+
+  ########################################
+  # Networking
+  ########################################
+
+  subnet_id = module.network.subnet_ids["${local.prefix}-snet-avd"]
+
+  ########################################
+  # AVD Naming
+  ########################################
+
+  host_pool_name = "${local.prefix}-avd-hp"
+  app_group_name = "${local.prefix}-avd-dag"
+  workspace_name = "${local.prefix}-avd-ws"
+
+  ########################################
+  # Resource Group + Region
+  ########################################
+
+  resource_group_name = azurerm_resource_group.avd.name
+  location            = local.location
+
+  ########################################
+  # Session Hosts
+  ########################################
+
+  vm_name_prefix = "${local.prefix}-avd-vm"
+
+  session_host_count = 1
+
+  vm_size = "Standard_D4s_v5"
+
+  ########################################
+  # Credentials
+  ########################################
+
+  admin_username = var.admin_username
+  admin_password = var.admin_password
+
+  ########################################
+  # Domain Join
+  ########################################
+
+  domain_name     = "dalberg.local"
+  domain_user     = "azureuser"
+  domain_password = var.admin_password
+
+  ########################################
+  # Tags
+  ########################################
+
+  tags = local.tags
+}
