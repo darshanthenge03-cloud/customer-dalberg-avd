@@ -188,10 +188,3 @@ resource "azurerm_virtual_network_dns_servers" "dns" {
     "8.8.8.8"
   ]
 }
-
-  ########################################
-  # Tags
-  ########################################
-
-  tags = local.tags
-}
