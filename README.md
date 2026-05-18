@@ -57,6 +57,8 @@ The deployment is built using:
 - Azure remote backend state management
 - Reusable Terraform modules
 - Dedicated network segmentation for AVD workloads
+- Automated Active Directory domain join
+- Automated Azure Virtual Desktop host registration
 
 > [!NOTE]
 > This repository contains only customer deployment logic and environment-specific configuration.  
@@ -72,6 +74,8 @@ The deployment is built using:
 - Simplified CI/CD automation
 - Scalable network architecture
 - Future-ready platform design
+- Automated Active Directory domain join
+- Automated AVD session host onboarding
 
 ---
 
@@ -95,7 +99,7 @@ The deployment is built using:
 │ • AVD Subnet            │   │ • Workspace             │
 │ • ADDS Subnet           │   │ • Desktop App Group     │
 │ • Bastion Subnet        │   │ • Session Hosts         │
-│ • GatewaySubnet         │   │                         │
+│ • GatewaySubnet         │   │ • AVD Registration      │
 └─────────────────────────┘   └─────────────────────────┘
 
                            │
@@ -145,6 +149,8 @@ This repository is responsible for:
 - Terraform backend configuration
 - GitHub Actions deployment workflows
 - Reusable module consumption
+- Automated AD domain join configuration
+- Automated session host onboarding
 
 Reusable infrastructure modules are maintained separately in:
 
@@ -188,6 +194,56 @@ dalberg-dev-cin-vnet
 
 ---
 
+# <img width="28" src="https://img.icons8.com/fluency/48/domain.png"/> Automated Domain Join
+
+Session hosts are automatically joined to the Active Directory Domain Services (ADDS) domain during deployment.
+
+The domain join process is fully automated using Terraform deployment extensions and infrastructure automation.
+
+## Automated Configuration
+
+| Component | Purpose |
+|---|---|
+| ADDS Integration | Automatic domain join |
+| VM Extensions | Domain join execution |
+| OU Placement | Centralized management |
+| DNS Configuration | ADDS name resolution |
+| Session Host Registration | Automatic AVD onboarding |
+
+---
+
+## Domain Join Workflow
+
+```text
+Terraform Deployment
+        ↓
+Session Host Provisioning
+        ↓
+DNS Configuration
+        ↓
+AD Domain Join Extension
+        ↓
+Automatic Reboot
+        ↓
+AVD Agent Registration
+        ↓
+Host Pool Availability
+```
+
+---
+
+## Example Domain Configuration
+
+```text
+Domain Name: dalberg.local
+OU Path: OU=AVD,DC=dalberg,DC=local
+```
+
+> [!NOTE]
+> Session hosts automatically rejoin the domain during redeployment or scaling activities through deployment automation.
+
+---
+
 # <img width="28" src="https://img.icons8.com/fluency/48/monitor.png"/> Azure Virtual Desktop Components
 
 ## Host Pool
@@ -223,7 +279,7 @@ dalberg-dev-cin-avd-dag
 
 # <img width="28" src="https://img.icons8.com/fluency/48/laptop.png"/> Session Hosts
 
-Windows 11 multi-session virtual machines are deployed as AVD session hosts.
+Windows 11 multi-session virtual machines are deployed as Azure Virtual Desktop session hosts with automated Active Directory domain join and host pool registration.
 
 | Component | Configuration |
 |---|---|
@@ -231,6 +287,8 @@ Windows 11 multi-session virtual machines are deployed as AVD session hosts.
 | VM Size | Standard_D4s_v5 |
 | Disk Type | Standard SSD |
 | Session Host Count | Configurable |
+| Domain Join | Automated |
+| AVD Registration | Automated |
 
 ### Example
 
@@ -296,6 +354,10 @@ Terraform Validate
 Terraform Plan
         ↓
 Terraform Apply
+        ↓
+AD Domain Join Automation
+        ↓
+AVD Host Pool Registration
 ```
 
 ---
@@ -307,6 +369,8 @@ Terraform Apply
 | AZURE_CREDENTIALS | Azure Service Principal Authentication |
 | TF_VAR_admin_username | Session Host Administrator Username |
 | TF_VAR_admin_password | Session Host Administrator Password |
+| TF_VAR_domain_username | AD Domain Join Account |
+| TF_VAR_domain_password | AD Domain Join Password |
 
 ---
 
@@ -413,6 +477,7 @@ Recommended approach:
 | Terraform | Infrastructure as Code |
 | GitHub Actions | CI/CD Automation |
 | Azure Virtual Desktop | Desktop Virtualization |
+| Active Directory Domain Services | Identity Management |
 | Azure Networking | Network Architecture |
 | Azure Storage Account | Remote Terraform Backend |
 
@@ -425,7 +490,9 @@ Cloud Engineer focused on Azure, Terraform, DevOps, and Infrastructure Automatio
 
 GitHub:  
 https://github.com/darshanthenge03-cloud
+
 <br>
+
 ### Core Stack
 
 <p align="left">
@@ -438,6 +505,9 @@ https://github.com/darshanthenge03-cloud
   <img width="42" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/powershell/powershell-original.svg" />
   <img width="42" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" />
 </p>
+
 <div align="center">
+
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0078D4,100:7C4DFF&height=70&section=footer"/>
+
 </div>
