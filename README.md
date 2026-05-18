@@ -490,11 +490,8 @@ Cloud Engineer focused on Azure, Terraform, DevOps, and Infrastructure Automatio
 
 GitHub:  
 https://github.com/darshanthenge03-cloud
-
 <br>
-
 ### Core Stack
-
 <p align="left">
   <img width="42" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" />
   <img width="42" src="https://skillicons.dev/icons?i=aws" />
